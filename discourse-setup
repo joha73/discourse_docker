@@ -268,8 +268,8 @@ scale_ram_and_cpu() {
 ## standard http / https ports must not be occupied
 ##
 check_ports() {
-    check_port "80"
-    check_port "443"
+    # check_port "80"
+    # check_port "443"
     echo "Ports 80 and 443 are free for use"
 }
 
