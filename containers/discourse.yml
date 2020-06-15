@@ -63,7 +63,7 @@ env:
   DISCOURSE_SMTP_ADDRESS: mail.your-server.de
   DISCOURSE_SMTP_PORT: 587
   DISCOURSE_SMTP_USER_NAME: jochen@zwanzig12.net
-  DISCOURSE_SMTP_PASSWORD: "CU7y4UYgd7CYw?D2)wZvmWx@DCLD(3"
+  DISCOURSE_SMTP_PASSWORD: 'CU7y4UYgd7CYw?D2)wZvmWx@DCLD(3'
   #DISCOURSE_SMTP_ENABLE_START_TLS: true           # (optional, default true)
 
   ## If you added the Lets Encrypt template, uncomment below to get a free SSL certificate
@@ -103,21 +103,21 @@ run:
       filename: /etc/nginx/conf.d/discourse.conf
       from: proxy_pass http://discourse;
       to: |
-         rewrite ^/(.*)$ /discourse/$1 break;
-         proxy_pass http://discourse;
+        rewrite ^/(.*)$ /discourse/$1 break;
+        proxy_pass http://discourse;
   - replace:
-     filename: /etc/nginx/conf.d/discourse.conf
-     from: etag off;
-     to: |
+      filename: /etc/nginx/conf.d/discourse.conf
+      from: etag off;
+      to: |
         etag off;
         location /discourse {
            rewrite ^/discourse/?(.*)$ /$1;
         }
   - replace:
-       filename: /etc/nginx/conf.d/discourse.conf
-       from: $proxy_add_x_forwarded_for
-       to: $http_fastly_client_ip
-       global: true
+      filename: /etc/nginx/conf.d/discourse.conf
+      from: $proxy_add_x_forwarded_for
+      to: $http_your_original_ip_header
+      global: true
   - exec: echo "Beginning of custom commands"
   ## If you want to set the 'From' email address for your first registration, uncomment and change:
   ## After getting the first signup email, re-comment the line. It only needs to run once.
